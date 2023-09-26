@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head') %>
+<body>
+
+<div class="container">
+    <div class="side-bar" id="side-bar">
+        <div class="head-text">
+          <h3><span class="fas fa-paw"></span>workflow</h3>
+          <i class="fas fa-times" id="close-button" onclick="HideNav()"></i>
+          </div>
+    
+        <ul class="links">
+          <li><a href="#dashboard" onclick="showContent('dashboard')"><span class="fas fa-home"></span>Dashboard</a></li>
+          <li><a href="#team" onclick="showContent('team')"><span class = "fas fa-users"></span>Team</a></li>
+          <li><a href="#projects" onclick="showContent('projects')" ><span class="far fa-folder"></span>Projects</a></li>
+          <li><a href="#calendar" onclick="showContent('calendar')" ><span class="far fa-calendar-minus"></span>Calendar</a></li>
+          <li><a href="#documents" onclick="showContent('documents')" ><span class="far fa-file"></span>Documents</a></li>
+          <li><a href="#reports" onclick="showContent('reports')" ><span class="fas fa-chart-bar"></span>Reports</a></li>
+        </ul>
+    </div>
+    
+    <div class="main">
+        <!--     header -->
+        <div class="header">
+          <div class="input-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="search" class="search-input" on>
+          </div>
+
+            <div class="profile-notification">
+              <div class="head-text">
+                <h2><span class="fas fa-bars" onclick="ShowNav()"></span>workflow</h3>
+              </div>
+
+              <div class="profile">
+                <a href="#notifications"><i class="fas fa-bell"></i></a>
+                <a href="#profile"><img src="./images/images.png" alt="profile"></a>
+              </div>
+            </div> 
+        </div>
+
+        <div class="content-container">
+          <!-- dashboard -->
+          <div class="content" id="dashboard">
+            <h1>Dashboard</h1>
+            <div id="dash">
+              Dashboard content goes here
+            </div>
+          </div>
+        
+          <!-- team section start-->
+          <div class="content" id="team">
+            <h1>Team</h1>
+            <div id="tea">
+                <p>Welcome to the Team section. Here you can learn more about our dedicated team members.</p>
+                <div class = "team-container">
+                <div class="team-member">
+                    <i class="fas fa-user"></i> John Doe
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user"></i> Jane Smith
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user"></i> Michael Johnson
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user"></i> Sarah Williams
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user"></i> David Brown
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user"></i> Emily Davis
+                </div>
+              </div>
+                
+            </div>
+          </div>
+        
+          <!-- projects section starts here  -->
+          <div class="content"  id="projects">
+            <h1>Projects</h1>
+            <div id="pro">
+              Projects content goes here
+            </div>
+          </div>
+        
+          <!-- calendar section starts from here   -->      
+          <div class="content" id="calendar">
+              <h1>Calendar</h1>
+            <div id="cal">
+              <iframe src="./src/main/resources/static/index.html" frameborder="0" scrolling = "no"></iframe>
+            </div>
+          </div>
+        
+          <!-- documents section starts form here    -->        
+          <div class="content" id="documents">
+            <h1>Documents</h1>
+            <div id="doc">
+                <!-- Placeholder for document files with PDF icons -->
+                <ul class="document-list">
+                    <li><a href="#" class="document-link"><i class="fas fa-file-pdf"></i> Document 1.pdf</a></li>
+                    <li><a href="#" class="document-link"><i class="fas fa-file-pdf"></i> Document 2.pdf</a></li>
+                    <li><a href="#" class="document-link"><i class="fas fa-file-pdf"></i> Document 3.pdf</a></li>
+                    <li><a href="#" class="document-link"><i class="fas fa-file-pdf"></i> Document 4.pdf</a></li>
+                    <li><a href="#" class="document-link"><i class="fas fa-file-pdf"></i> Document 5.pdf</a></li>
+                    <li><a href="#" class="document-link"><i class="fas fa-file-pdf"></i> Document 6.pdf</a></li>
+                  
+                </ul>
+            </div>
+          </div>
+
+          <!-- reports section starts from here      -->
+          <div class="content" id="reports">
+            <h1>Reports</h1>
+            <div id="rep">
+                <p>Welcome to the Reports section. This is where you can access and review various reports and data analysis.</p>
+                
+                <h2>Monthly Sales Report</h2>
+                <p>The monthly sales report provides an overview of our sales performance for the current year. It includes data on revenue, expenses, and profit margins.</p>
+                
+                <h2>Website Traffic Analysis</h2>
+                <p>Our website traffic analysis report offers insights into user behavior on our website. It tracks metrics such as page views, bounce rate, and user demographics.</p>
+                
+                <h2>Customer Satisfaction Survey</h2>
+                <p>We regularly conduct customer satisfaction surveys to gather feedback from our clients. The survey report summarizes the responses and highlights areas for improvement.</p>
+                
+                <!-- Add more report descriptions here as needed -->
+        
+                <p>Feel free to click on the reports below to access the detailed information:</p>
+                <ul id="report-list">
+                    <li><a href="#" class="report-link">Monthly Sales Report</a></li>
+                    <li><a href="#" class="report-link">Website Traffic Analysis</a></li>
+                    <li><a href="#" class="report-link">Customer Satisfaction</a></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="js/daypilot/daypilot-all.min.js"></script>
+<script src="./script.js"></script>
+</body>
+</html>

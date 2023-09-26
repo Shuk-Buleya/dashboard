@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/charthead") %>
+<body>
+    <header>
+        <h1>Pie Chart</h1>
+    </header>
+    <main>
+        <section class="chart-container">
+            <h2>Pie Chart</h2>
+            <p class="chart-description">A Pie Chart.</p>
+            <canvas id="pieChart"></canvas>
+        </section>
+    </main>
+    <div class="back-home">
+        <button class="back-home"><a href="/">Go back</a></button>
+    </div>
+<script>
+
+
+    let xLine = [
+          "<%= data[0].fruit %>",
+          "<%= data[1].fruit %>",
+          "<%= data[2].fruit %>",
+          "<%= data[3].fruit %>",
+          "<%= data[4].fruit %>",
+          "<%= data[5].fruit %>",
+          "<%= data[6].fruit %>",
+        ];
+
+    let yLine = [
+        "<%= data[0].amount %>",
+        "<%= data[1].amount %>",
+        "<%= data[2].amount %>",
+        "<%= data[3].amount %>",
+        "<%= data[4].amount %>",
+        "<%= data[5].amount %>",
+        "<%= data[6].amount %>",
+    ];
+
+    new Chart("pieChart", {
+            type: 'pie',
+            data: {
+                labels: xLine,
+                datasets: [{
+                    data: yLine,
+                    backgroundColor: ['skyblue', 'orange', 'pink', 'yellow', 'green', 'black', 'red'],
+                }]
+            },
+        });
+</script>
+</body>
+</html>

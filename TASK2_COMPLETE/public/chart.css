@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@300;400&family=Roboto&display=swap');
+
+
+/* Reseting some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1.25rem 0;
+}
+
+header h1 {
+    font-size: 2.25rem;
+}
+
+/* Main content styles for chart pages */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.25rem;
+}
+
+.chart-container {
+    background-color: #fff;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.3125rem;
+    box-shadow: 0rem 0.125rem 0.3125rem rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 1.25rem;
+    margin: 1.25rem;
+    width: 80%;
+    max-width: 50rem;
+}
+
+.chart-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.625rem;
+}
+
+.chart-description {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 1.25rem;
+}
+
+/* Common styles for canvas charts */
+canvas {
+    max-width: 100%;
+    height: auto;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.3125rem;
+    margin-top: 1.25rem;
+}
+.back-home{
+    width: 40%;
+    padding: 1rem;
+    margin: auto;
+}
+.back-home a{
+    text-decoration: none;
+    color: #fff;
+    font-family: nunito;
+}
+
+.back-home button{
+    background-color: #000;
+    border-radius: .7rem;
+    border: none;
+}
