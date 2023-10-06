@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+
+    <nav class="main-nav">
+        <%- include('partials/mainnav') %>
+    </nav>
+
+    <div id="overlay"></div>
+
+    <div class="container">
+        <div class="side-bar">
+            <%- include('partials/sidenav') %>
+        </div>
+
+        <div class="main">
+            <div class="header">
+                <div class="text-head">
+                    <h1>Confirm/validate Events</h1>
+                    <p>Events list</p>
+                </div>
+
+                <div class="add-user" onclick="showAddForm()">
+                    <p><i class="fas fa-ellipsis-v"></i> Filter</p>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (typeof events !== 'undefined' && events !== null && events.length > 0) { %>
+                        <% events.forEach(event => { %>
+                            <tr>
+                                <td><%= event.eventNumber %></td>
+                                <td><%= event.event_name %></td>
+                                <td><%= event.formatted_event_date %></td>
+                                <td><%= event.venue %></td>
+                                <td>
+                                    <div style="display: flex; gap: 1rem">
+                                        <form action="/userEvents/create" method="POST" id="volunteerForm_<%= event.event_id %>" class="volunteer">
+                                            <input type="hidden" name="eventId" value="<%= event.event_id %>">
+                                            <button type="submit" class="volunteer-button">validate</button>
+                                        </form> 
+                                        <form action="/userEvents/delete" method="POST" id="unvolunteerForm_<%= event.event_id %>" class="volunteer">
+                                            <input type="hidden" name="eventId" value="<%= event.event_id %>">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="unvolunteer-button">unvalidate</button>
+                                        </form>  
+
+                                    </div>                                           
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6">No events found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+     
+</body>
+
+</html>

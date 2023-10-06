@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <%- include('partials/mainnav') %>
+    </nav>
+
+    <div id="overlay"></div>
+
+    <div class="container">
+        <div class="side-bar">
+            <%- include('partials/sidenav') %>
+        </div>
+
+        <div class="main">
+            <div class="header">
+                <div class="text-head">
+                    <h1>volunteer</h1>
+                    <p>volunteer list</p>
+                </div>
+                <div class="email-user" onclick="showEmailForm()">
+                    <p><i class="fa-solid fa-envelope"></i> Send Email to volunteers</p>
+                  </div>
+
+                <div class="add-user" onclick="showAddForm()">
+                    <p><i class="fas fa-user-plus"></i> Add Volunteer</p>
+                </div>
+            </div>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Volunteer ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (typeof volunteer !== 'undefined' && volunteer !== null && volunteer.length > 0) { %>
+                    <% volunteer.forEach(volunteer => { %>
+                      <tr>
+                        <td><%= volunteer.volunteer_id %></td>
+                        <td><%= volunteer.fname %></td>
+                        <td><%= volunteer.sname %></td>
+                        <td><%= volunteer.email %></td>
+                        <td><%= volunteer.phone %></td>
+                        <td>
+                            <i class="fas fa-ellipsis-v" onclick="showAction('<%= volunteer.volunteer_id %>')"></i>
+                            <div class="action" style="display: none;" id="action_<%= volunteer.volunteer_id %>">
+                                <i class="fas fa-pen" onclick="showVolunteerUpdateForm('<%= volunteer.volunteer_id %>', '<%= volunteer.fname %>', '<%= volunteer.sname %>', '<%= volunteer.email %>', '<%= volunteer.phone %>')"></i>
+                                <i class="fas fa-trash-can" onclick="showVolunteerDeleteForm('<%= volunteer.volunteer_id %>', '<%= volunteer.fname %>')"></i>
+                            </div>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="6">No volunteer found</td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <div class="forms">
+        <div id="emailFormContainer" class="form-container" style="display: none">
+            <div class="send-email-form">
+              <h2>
+                Send Email <i class="fas fa-times" onclick="closeEmailForm()"></i>
+              </h2>
+              <form method="POST" action="/volunteer/email/send">
+                <label for="recepient">Recepient:</label>
+                <select class="custom-select" id="recepient" name="userEmail">
+                  <% volunteer.forEach(volunteer => { %>
+                  <option value="<%= volunteer.email %>">
+                    <%= volunteer.fname %> <%= volunteer.sname %>
+                  </option>
+                  <% }); %></select
+                ><br />
+            
+                <!-- <label for="receiver">receiver email</label>
+                <input type="text" name="userEmail" id=""> -->
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="" /><br />
+                <label for="message">Message</label>
+                <textarea name="content" id="message" cols="30" rows="10"></textarea>
+                <button type="submit">Send Email</button>
+              </form>
+            </div>
+          </div>
+
+        <div id="addFormContainer" class="form-container" style="display: none;">
+            <div class="add-volunteer-form">
+                <h2>Add Volunteer <i class="fas fa-times" onclick="closeAddForm()"></i></h2>
+                <form method="POST" action="/volunteer/create">
+                    <label for="fname">First Name:</label>
+                    <input type="text" id="fname" name="fname" required><br>
+                    
+                    <label for="sname">Last Name:</label>
+                    <input type="text" id="sname" name="sname" required><br>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required><br>
+                    
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required><br>
+                    
+                    <button type="submit">Add Volunteer</button>
+                </form>
+            </div>
+        </div>
+        
+
+        <div id="updateVolunteerFormContainer" class="form-container" style="display: none;">
+            <div class="update-volunteer-form">
+                <h2>Edit Volunteer <i class="fas fa-times" onclick="closeVolunteerForms()"></i></h2>
+                <form method="POST" action="/volunteer/update">
+                    <input type="hidden" name="_method" value="PUT">
+                    <label for="volunteer_id">Volunteer ID:</label>
+                    <input type="text" id="volunteer_id" name="volunteer_id" required><br>
+        
+                    <label for="fname">First Name:</label>
+                    <input type="text" id="fname" name="fname" required><br>
+        
+                    <label for="sname">Last Name:</label>
+                    <input type="text" id="sname" name="sname" required><br>
+        
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required><br>
+        
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required><br>
+        
+                    <button type="submit">Update Volunteer</button>
+                </form>
+            </div>
+        </div>
+        
+        <div id="deleteVolunteerFormContainer" class="form-container" style="display: none;">
+            <div class="delete-volunteer-form">
+                <h2>Delete Volunteer <i class="fas fa-times" onclick="closeVolunteerForms()"></i></h2>
+                <form method="POST" action="/volunteer/delete">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <label for="volunteer_id">Volunteer ID:</label>
+                    <input type="text" name="volunteer_id" required><br>
+        
+                    <button type="submit"><i class="fas fa-trash-can"></i> Delete</button>
+                </form>
+            </div>
+        </div>
+         
+    </div>  
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>

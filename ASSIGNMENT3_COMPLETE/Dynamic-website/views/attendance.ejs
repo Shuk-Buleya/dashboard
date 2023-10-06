@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+
+    <nav class="main-nav">
+        <%- include('partials/mainnav') %>
+    </nav>
+
+    <div id="overlay"></div>
+
+    <div class="container">
+        <div class="side-bar">
+            <%- include('partials/sidenav') %>
+        </div>
+
+        <div class="main">
+            <div class="header">
+                <div class="text-head">
+                    <h1>Attendance</h1>
+                    <p>Attendance records</p>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attendance ID</th>
+                        <th>Event Name</th>
+                        <th>Volunteer Name</th>
+                        <th>Role ID</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (typeof attendance !== 'undefined' && attendance !== null && attendance.length > 0) { %>
+                        <% attendance.forEach(record => { %>
+                            <tr>
+                                <td><%= record.attendance_id %></td>
+                                <td><%= record.event_name %></td>
+                                <td><%= record.volunteer_name %></td>
+                                <td><%= record.role_name %></td>
+                                <td><%= record.check_in %></td>
+                                <td><%= record.check_out ? record.check_out : 'N/A' %></td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6">No attendance records found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div class="total-attendance">
+                Total Attendance: <%= totalAttendanceCount %>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>

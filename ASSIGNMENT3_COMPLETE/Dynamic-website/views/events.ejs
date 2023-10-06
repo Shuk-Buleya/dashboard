@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include('partials/head') %>
+    </head>
+
+    <body>
+
+        <nav class="main-nav">
+            <%- include('partials/mainnav') %>
+        </nav>
+
+        <div id="overlay"></div>
+
+        <div class="container">
+            <div class="side-bar">
+                <%- include('partials/sidenav') %>
+            </div>
+
+            <div class="main">
+                <div class="header">
+                    <div class="text-head">
+                        <h1>Events</h1>
+                        <p>Events list</p>
+                    </div>
+
+                    <div class="add-user" onclick="showAddForm()">
+                        <p><i class="fas fa-user-plus"></i> Add Event</p>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Event ID</th>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Total Volunteers</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% if (typeof events !== 'undefined' && events !== null && events.length > 0) { %>
+                        <% events.forEach(event => { %>
+                        <tr>
+                            <td><%= event.event_id %></td>
+                            <td><%= event.event_name %></td>
+                            <td><%= event.formatted_event_date %></td>
+                            <td><%= event.venue %></td>
+                            <td><%= event.total_volunteers %></td>
+                            <td>
+                                <i class="fas fa-ellipsis-v" onclick="showAction('<%= event.event_id %>')"></i>
+                                <div class="action" style="display: none;" id="action_<%= event.event_id %>">
+                                    <i class="fas fa-pen" onclick="showUpdateForm('<%= event.event_id %>', '<%= event.event_name %>', '<%= event.formatted_event_date %>', '<%= event.venue %>', '<%= event.total_volunteers %>')"></i>
+                                    <i class="fas fa-trash-can" onclick="showDeleteForm('<%= event.event_id %>', '<%= event.event_name %>')"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                        <td colspan="6">No events found</td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="forms">
+
+            <div class="form-container" id="addFormContainer" style="display: none;">
+            <div class="addevent">
+                <h2>ADD Event <i class="fas fa-times" onclick="closeAddForm()"></i></h2>
+        
+                <form method="POST" action="/events/create">
+                <label for="event_name">Event Name:</label>
+                <input type="text" id="event_name" name="event_name" required>
+        
+                <label for="event_date">Event Date:</label>
+                <input type="date" id="event_date" name="event_date" required>
+        
+                <label for="venue">Venue:</label>
+                <input type="text" id="venue" name="venue" required>
+        
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="50"></textarea>
+        
+                <label for="total_volunteers">Total Volunteers:</label>
+                <input type="number" id="total_volunteers" name="total_volunteers" required>
+        
+                <button type="submit">Add Event</button>
+                </form>
+            </div>
+            </div>
+        
+            <div class="form-container" id="updateFormContainer" style="display: none;">
+            <div class="updateevent">
+                <h2>Edit Event <i class="fas fa-times" onclick="closeUpdateForm()"></i></h2>
+        
+                <form method="POST" action="/events/update">
+                <input type="hidden" name="_method" value="PUT">
+        
+                <label for="event_id">Event ID:</label>
+                <input type="text" id="event_id" name="event_id" required>
+        
+                <label for="event_name">Event Name:</label>
+                <input type="text" id="event_name" name="event_name" required>
+        
+                <label for="event_date">Event Date:</label>
+                <input type="date" id="event_date" name="event_date" required>
+        
+                <label for="venue">Venue:</label>
+                <input type="text" id="venue" name="venue" required>
+        
+                <label for="total_volunteers">Total Volunteers:</label>
+                <input type="number" id="total_volunteers" name="total_volunteers" required>
+        
+                <button type="submit">Update Event</button>
+                </form>
+            </div>
+            </div>
+        
+            <div class="form-container" id="deleteFormContainer" style="display: none;">
+            <div class="deletteevent">
+                <h2>Delete Event <i class="fas fa-times" onclick="closeDeleteForm()"></i></h2>
+        
+                <form method="POST" action="/events/delete">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="text" name="event_id" required>
+                <button type="submit"><i class="fas fa-trash-can"></i> Delete</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        
+
+        <script src="js/index.js"></script>
+    </body>
+
+</html>

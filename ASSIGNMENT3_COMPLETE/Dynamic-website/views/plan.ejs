@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include('partials/head') %>
+    </head>
+
+    <body>
+
+        <nav class="main-nav">
+            <%- include('partials/mainnav') %>
+        </nav>
+
+        <div id="overlay"></div>
+
+        <div class="container">
+            <div class="side-bar">
+                <%- include('partials/sidenav') %>
+            </div>
+
+            <div class="main">
+                <div class="header">
+                    <div class="text-head">
+                        <h1>Confirmed Events</h1>
+                        <p>confirmed list</p>
+                    </div>
+
+                    <div class="add-user" onclick="showAddForm()">
+                        <p><i class="fas fa-ellipsis-v"></i> Filter</p>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% if (typeof events !== 'undefined' && events !== null && events.length > 0) { %>
+                        <% events.forEach(event => { %>
+                        <tr>
+                            <td><%= event.event_name %></td>
+                            <td><%= event.formatted_event_date %></td>
+                            <td><%= event.venue %></td>
+                            <td>
+                                <i class="fas fa-check" onclick="showAction('<%= event.event_id %>')"></i>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                        <td colspan="6">No events found</td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="js/index.js"></script>
+    </body>
+
+</html>
